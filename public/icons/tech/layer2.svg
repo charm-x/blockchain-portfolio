@@ -1,0 +1,10 @@
+<svg width="256" height="256" viewBox="0 0 256 256" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="256" height="256" rx="35" fill="#00A3FF"/>
+  <rect x="60" y="80" width="136" height="40" rx="10" fill="white"/>
+  <rect x="60" y="136" width="136" height="40" rx="10" fill="white"/>
+  <path d="M80 80L80 176" stroke="#00A3FF" stroke-width="8"/>
+  <path d="M120 80L120 176" stroke="#00A3FF" stroke-width="8"/>
+  <path d="M160 80L160 176" stroke="#00A3FF" stroke-width="8"/>
+  <text x="200" y="110" font-family="Arial" font-size="24" font-weight="bold" fill="#00A3FF">1</text>
+  <text x="200" y="166" font-family="Arial" font-size="24" font-weight="bold" fill="#00A3FF">2</text>
+</svg>
