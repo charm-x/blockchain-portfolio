@@ -1,103 +1,353 @@
-import Image from "next/image";
+import Link from "next/link";
+import Button from "@/components/ui/Button";
+import ProjectImage from "@/components/ui/ProjectImage";
+import SkillLevel from "@/components/ui/SkillLevel";
+import BlockConfirmation from "@/components/ui/BlockConfirmation";
 
 export default function Home() {
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm/6 text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-[family-name:var(--font-geist-mono)] font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+    <div className="px-4 md:px-8">
+      {/* Hero Section */}
+      <section className="py-20 md:py-32 flex flex-col items-center text-center">
+        <div className="max-w-4xl mx-auto">
+          <h1 className="text-4xl md:text-6xl font-bold mb-6">
+            <span className="gradient-text">Blockchain Developer</span>
+          </h1>
+          <h2 className="text-2xl md:text-3xl font-medium mb-8 text-gray-300">
+            Smart Contract Engineer. dApp Builder. On-Chain Craftsman.
+          </h2>
+          <p className="text-lg text-gray-400 mb-10 max-w-2xl mx-auto">
+            Building the decentralized future with secure smart contracts,
+            innovative dApps, and blockchain solutions that push the boundaries of what's possible.
+          </p>
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Button href="/projects" variant="primary" size="lg" className="glow-effect">
+              View My Work
+            </Button>
+            <Button href="/blocks" variant="outline" size="lg">
+              Explore Blocks
+            </Button>
+          </div>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+      </section>
+
+      {/* Featured Projects Section */}
+      <section className="py-16 border-t border-[#2d2d2d]">
+        <div className="max-w-6xl mx-auto">
+          <div className="flex justify-between items-center mb-10">
+            <h2 className="text-2xl md:text-3xl font-bold">Featured Projects</h2>
+            <Link href="/projects" className="text-[#00ff9d] hover:underline">
+              View All →
+            </Link>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {/* Project Card 1 */}
+            <div className="border border-[#2d2d2d] rounded-lg overflow-hidden bg-[#121212] hover:border-[#00ff9d] transition-all duration-300">
+              <div className="relative h-48 w-full bg-[#1a1a1a] flex items-center justify-center">
+                <ProjectImage
+                  src="/projects/defi-swap.jpg"
+                  alt="DeFi Swap Protocol"
+                  fallbackSrc="/icons/tech/solidity.svg"
+                />
+              </div>
+              <div className="p-5">
+                <h3 className="text-xl font-bold text-white mb-2">DeFi Swap Protocol</h3>
+                <div className="flex flex-wrap gap-2 mb-3">
+                  <div className="bg-[#1a1a1a] px-2 py-1 rounded-md text-xs flex items-center">
+                    <img src="/icons/tech/solidity.svg" alt="Solidity" className="w-4 h-4 mr-1" />
+                    Solidity
+                  </div>
+                  <div className="bg-[#1a1a1a] px-2 py-1 rounded-md text-xs flex items-center">
+                    <img src="/icons/tech/react.svg" alt="React" className="w-4 h-4 mr-1" />
+                    React
+                  </div>
+                  <div className="bg-[#1a1a1a] px-2 py-1 rounded-md text-xs flex items-center">
+                    <img src="/icons/tech/hardhat.svg" alt="Hardhat" className="w-4 h-4 mr-1" />
+                    Hardhat
+                  </div>
+                </div>
+                <p className="text-gray-300 text-sm mb-4">
+                  Decentralized token swap protocol with automated market making and liquidity pools.
+                </p>
+                <div className="flex justify-between items-center">
+                  <div className="flex space-x-3">
+                    <a href="#" className="text-gray-400 hover:text-[#00ff9d] transition-colors">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+                      </svg>
+                    </a>
+                    <a href="#" className="text-gray-400 hover:text-[#00ff9d] transition-colors">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                        <polyline points="15 3 21 3 21 9"></polyline>
+                        <line x1="10" y1="14" x2="21" y2="3"></line>
+                      </svg>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Project Card 2 */}
+            <div className="border border-[#2d2d2d] rounded-lg overflow-hidden bg-[#121212] hover:border-[#00ff9d] transition-all duration-300">
+              <div className="relative h-48 w-full bg-[#1a1a1a] flex items-center justify-center">
+                <ProjectImage
+                  src="/projects/nft-marketplace.jpg"
+                  alt="NFT Marketplace"
+                  fallbackSrc="/icons/tech/ipfs.svg"
+                />
+              </div>
+              <div className="p-5">
+                <h3 className="text-xl font-bold text-white mb-2">NFT Marketplace</h3>
+                <div className="flex flex-wrap gap-2 mb-3">
+                  <div className="bg-[#1a1a1a] px-2 py-1 rounded-md text-xs flex items-center">
+                    <img src="/icons/tech/solidity.svg" alt="Solidity" className="w-4 h-4 mr-1" />
+                    Solidity
+                  </div>
+                  <div className="bg-[#1a1a1a] px-2 py-1 rounded-md text-xs flex items-center">
+                    <img src="/icons/tech/nextjs.svg" alt="Next.js" className="w-4 h-4 mr-1" />
+                    Next.js
+                  </div>
+                  <div className="bg-[#1a1a1a] px-2 py-1 rounded-md text-xs flex items-center">
+                    <img src="/icons/tech/ipfs.svg" alt="IPFS" className="w-4 h-4 mr-1" />
+                    IPFS
+                  </div>
+                </div>
+                <p className="text-gray-300 text-sm mb-4">
+                  Decentralized NFT marketplace with minting, trading, and auction capabilities.
+                </p>
+                <div className="flex justify-between items-center">
+                  <div className="flex space-x-3">
+                    <a href="#" className="text-gray-400 hover:text-[#00ff9d] transition-colors">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+                      </svg>
+                    </a>
+                    <a href="#" className="text-gray-400 hover:text-[#00ff9d] transition-colors">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                        <polyline points="15 3 21 3 21 9"></polyline>
+                        <line x1="10" y1="14" x2="21" y2="3"></line>
+                      </svg>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Project Card 3 */}
+            <div className="border border-[#2d2d2d] rounded-lg overflow-hidden bg-[#121212] hover:border-[#00ff9d] transition-all duration-300">
+              <div className="relative h-48 w-full bg-[#1a1a1a] flex items-center justify-center">
+                <ProjectImage
+                  src="/projects/multi-sig.jpg"
+                  alt="Multi-Sig Wallet"
+                  fallbackSrc="/icons/tech/ethereum.svg"
+                />
+              </div>
+              <div className="p-5">
+                <h3 className="text-xl font-bold text-white mb-2">Multi-Sig Wallet</h3>
+                <div className="flex flex-wrap gap-2 mb-3">
+                  <div className="bg-[#1a1a1a] px-2 py-1 rounded-md text-xs flex items-center">
+                    <img src="/icons/tech/solidity.svg" alt="Solidity" className="w-4 h-4 mr-1" />
+                    Solidity
+                  </div>
+                  <div className="bg-[#1a1a1a] px-2 py-1 rounded-md text-xs flex items-center">
+                    <img src="/icons/tech/typescript.svg" alt="TypeScript" className="w-4 h-4 mr-1" />
+                    TypeScript
+                  </div>
+                  <div className="bg-[#1a1a1a] px-2 py-1 rounded-md text-xs flex items-center">
+                    <img src="/icons/tech/ethers.svg" alt="Ethers.js" className="w-4 h-4 mr-1" />
+                    Ethers.js
+                  </div>
+                </div>
+                <p className="text-gray-300 text-sm mb-4">
+                  Secure multi-signature wallet requiring multiple approvals for transactions.
+                </p>
+                <div className="flex justify-between items-center">
+                  <div className="flex space-x-3">
+                    <a href="#" className="text-gray-400 hover:text-[#00ff9d] transition-colors">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+                      </svg>
+                    </a>
+                    <a href="#" className="text-gray-400 hover:text-[#00ff9d] transition-colors">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                        <polyline points="15 3 21 3 21 9"></polyline>
+                        <line x1="10" y1="14" x2="21" y2="3"></line>
+                      </svg>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Skills Section */}
+      <section className="py-16 border-t border-[#2d2d2d]">
+        <div className="max-w-6xl mx-auto">
+          <h2 className="text-2xl md:text-3xl font-bold mb-10">Skills & Technologies</h2>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+            {/* Skill Category 1 */}
+            <div className="border border-[#2d2d2d] rounded-lg p-6 bg-[#121212]">
+              <h3 className="text-xl font-bold mb-4 text-[#00ff9d]">Smart Contracts</h3>
+              <ul className="space-y-4 text-gray-300">
+                <li>
+                  <div className="flex items-center mb-2">
+                    <img src="/icons/tech/solidity.svg" alt="Solidity" className="w-5 h-5 mr-2" />
+                    <span>Solidity</span>
+                  </div>
+                  <BlockConfirmation level={95} />
+                </li>
+                <li>
+                  <div className="flex items-center mb-2">
+                    <img src="/icons/tech/erc.svg" alt="ERC Standards" className="w-5 h-5 mr-2" />
+                    <span>ERC Standards</span>
+                  </div>
+                  <BlockConfirmation level={90} />
+                </li>
+                <li>
+                  <div className="flex items-center mb-2">
+                    <img src="/icons/tech/openzeppelin.svg" alt="OpenZeppelin" className="w-5 h-5 mr-2" />
+                    <span>OpenZeppelin</span>
+                  </div>
+                  <BlockConfirmation level={85} />
+                </li>
+                <li>
+                  <div className="flex items-center mb-2">
+                    <img src="/icons/tech/gas.svg" alt="Gas Optimization" className="w-5 h-5 mr-2" />
+                    <span>Gas Optimization</span>
+                  </div>
+                  <BlockConfirmation level={80} />
+                </li>
+              </ul>
+            </div>
+
+            {/* Skill Category 2 */}
+            <div className="border border-[#2d2d2d] rounded-lg p-6 bg-[#121212]">
+              <h3 className="text-xl font-bold mb-4 text-[#00ff9d]">Development</h3>
+              <ul className="space-y-4 text-gray-300">
+                <li>
+                  <div className="flex items-center mb-2">
+                    <img src="/icons/tech/hardhat.svg" alt="Hardhat" className="w-5 h-5 mr-2" />
+                    <span>Hardhat</span>
+                  </div>
+                  <BlockConfirmation level={90} />
+                </li>
+                <li>
+                  <div className="flex items-center mb-2">
+                    <img src="/icons/tech/truffle.svg" alt="Truffle" className="w-5 h-5 mr-2" />
+                    <span>Truffle</span>
+                  </div>
+                  <BlockConfirmation level={75} />
+                </li>
+                <li>
+                  <div className="flex items-center mb-2">
+                    <img src="/icons/tech/ethers.svg" alt="Ethers.js" className="w-5 h-5 mr-2" />
+                    <span>Ethers.js</span>
+                  </div>
+                  <BlockConfirmation level={85} />
+                </li>
+                <li>
+                  <div className="flex items-center mb-2">
+                    <img src="/icons/tech/web3.svg" alt="Web3.js" className="w-5 h-5 mr-2" />
+                    <span>Web3.js</span>
+                  </div>
+                  <BlockConfirmation level={70} />
+                </li>
+              </ul>
+            </div>
+
+            {/* Skill Category 3 */}
+            <div className="border border-[#2d2d2d] rounded-lg p-6 bg-[#121212]">
+              <h3 className="text-xl font-bold mb-4 text-[#00ff9d]">Frontend</h3>
+              <ul className="space-y-4 text-gray-300">
+                <li>
+                  <div className="flex items-center mb-2">
+                    <img src="/icons/tech/react.svg" alt="React" className="w-5 h-5 mr-2" />
+                    <span>React</span>
+                  </div>
+                  <BlockConfirmation level={80} />
+                </li>
+                <li>
+                  <div className="flex items-center mb-2">
+                    <img src="/icons/tech/nextjs.svg" alt="Next.js" className="w-5 h-5 mr-2" />
+                    <span>Next.js</span>
+                  </div>
+                  <BlockConfirmation level={75} />
+                </li>
+                <li>
+                  <div className="flex items-center mb-2">
+                    <img src="/icons/tech/typescript.svg" alt="TypeScript" className="w-5 h-5 mr-2" />
+                    <span>TypeScript</span>
+                  </div>
+                  <BlockConfirmation level={65} />
+                </li>
+                <li>
+                  <div className="flex items-center mb-2">
+                    <img src="/icons/tech/tailwind.svg" alt="Tailwind CSS" className="w-5 h-5 mr-2" />
+                    <span>Tailwind CSS</span>
+                  </div>
+                  <BlockConfirmation level={80} />
+                </li>
+              </ul>
+            </div>
+
+            {/* Skill Category 4 */}
+            <div className="border border-[#2d2d2d] rounded-lg p-6 bg-[#121212]">
+              <h3 className="text-xl font-bold mb-4 text-[#00ff9d]">Blockchain</h3>
+              <ul className="space-y-4 text-gray-300">
+                <li>
+                  <div className="flex items-center mb-2">
+                    <img src="/icons/tech/ethereum.svg" alt="Ethereum" className="w-5 h-5 mr-2" />
+                    <span>Ethereum</span>
+                  </div>
+                  <BlockConfirmation level={95} />
+                </li>
+                <li>
+                  <div className="flex items-center mb-2">
+                    <img src="/icons/tech/polygon.svg" alt="Polygon" className="w-5 h-5 mr-2" />
+                    <span>Polygon</span>
+                  </div>
+                  <BlockConfirmation level={85} />
+                </li>
+                <li>
+                  <div className="flex items-center mb-2">
+                    <img src="/icons/tech/bsc.svg" alt="BSC" className="w-5 h-5 mr-2" />
+                    <span>BSC</span>
+                  </div>
+                  <BlockConfirmation level={70} />
+                </li>
+                <li>
+                  <div className="flex items-center mb-2">
+                    <img src="/icons/tech/layer2.svg" alt="Layer 2 Solutions" className="w-5 h-5 mr-2" />
+                    <span>Layer 2 Solutions</span>
+                  </div>
+                  <BlockConfirmation level={80} />
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* CTA Section */}
+      <section className="py-20 text-center border-t border-[#2d2d2d]">
+        <div className="max-w-3xl mx-auto">
+          <h2 className="text-2xl md:text-3xl font-bold mb-6">Ready to Build Something Amazing?</h2>
+          <p className="text-lg text-gray-400 mb-10">
+            Let's collaborate on your next blockchain project and bring your vision to life.
+          </p>
+          <Button href="/contact" variant="primary" size="lg" className="glow-effect">
+            Get in Touch
+          </Button>
+        </div>
+      </section>
     </div>
   );
 }
