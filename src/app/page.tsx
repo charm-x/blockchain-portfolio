@@ -2,6 +2,7 @@ import Link from "next/link";
 import Button from "@/components/ui/Button";
 import ProjectImage from "@/components/ui/ProjectImage";
 import BlockConfirmation from "@/components/ui/BlockConfirmation";
+import ContractSigningSection from "@/components/home/ContractSigningSection";
 import Image from "next/image";
 
 export default function Home() {
@@ -348,18 +349,8 @@ export default function Home() {
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="py-20 text-center border-t border-[#2d2d2d]">
-        <div className="max-w-3xl mx-auto">
-          <h2 className="text-2xl md:text-3xl font-bold mb-6">Ready to Build Something Amazing?</h2>
-          <p className="text-lg text-gray-400 mb-10">
-            Let&apos;s collaborate on your next blockchain project and bring your vision to life.
-          </p>
-          <Button href="/contact" variant="primary" size="lg" className="glow-effect">
-            Get in Touch
-          </Button>
-        </div>
-      </section>
+      {/* Contract Signing Section */}
+      <ContractSigningSection />
     </div>
   );
 }

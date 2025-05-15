@@ -62,9 +62,9 @@ export default function AnimatedBlockchainBackground() {
     };
 
     Promise.all([
-      loadImage('/icons/crypto/bitcoin.svg'),
-      loadImage('/icons/crypto/ethereum.svg'),
-      loadImage('/icons/crypto/solana.svg')
+      loadImage('/icons/crypto/btc.svg'),
+      loadImage('/icons/crypto/eth.svg'),
+      loadImage('/icons/crypto/sol.svg')
     ]).then(([btcIcon, ethIcon, solIcon]) => {
       setIcons({
         BTC: btcIcon,

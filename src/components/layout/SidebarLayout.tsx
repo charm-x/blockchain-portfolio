@@ -96,7 +96,7 @@ export default function SidebarLayout({ children }: { children: React.ReactNode 
                   onMouseLeave={() => setIsHovering(null)}
                 >
                   <motion.div
-                    className={`border rounded-lg p-3 transition-all ${
+                    className={`border rounded-lg p-3 transition-all my-2 ${
                       isActive
                         ? 'border-[#00ff9d] bg-[#121212]'
                         : 'border-[#2d2d2d] bg-[#121212] hover:border-gray-500'
@@ -144,18 +144,20 @@ export default function SidebarLayout({ children }: { children: React.ReactNode 
                       </div>
                     </div>
 
-                    {/* Mining animation when hovered */}
-                    <AnimatePresence>
-                      {isHovered && !isActive && (
-                        <motion.div
-                          className="mt-2 h-1 bg-gradient-to-r from-[#00ff9d] to-[#00c3ff] rounded-full"
-                          initial={{ width: 0 }}
-                          animate={{ width: '100%' }}
-                          exit={{ width: 0 }}
-                          transition={{ duration: 0.5 }}
-                        />
-                      )}
-                    </AnimatePresence>
+                    {/* Mining animation container - always present to maintain consistent height */}
+                    <div className="mt-2 h-1 rounded-full overflow-hidden">
+                      <AnimatePresence>
+                        {isHovered && !isActive && (
+                          <motion.div
+                            className="h-full w-full bg-gradient-to-r from-[#00ff9d] to-[#00c3ff]"
+                            initial={{ width: 0 }}
+                            animate={{ width: '100%' }}
+                            exit={{ width: 0 }}
+                            transition={{ duration: 0.5 }}
+                          />
+                        )}
+                      </AnimatePresence>
+                    </div>
                   </motion.div>
                 </Link>
               );
@@ -317,6 +319,9 @@ export default function SidebarLayout({ children }: { children: React.ReactNode 
                               {item.hash.substring(0, 18)}...
                             </div>
                           </div>
+
+                          {/* Empty container to maintain consistent height with desktop */}
+                          <div className="mt-2 h-1 rounded-full overflow-hidden"></div>
                         </motion.div>
                       </Link>
                     );

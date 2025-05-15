@@ -54,7 +54,7 @@ export default function ProjectCard({
 
   return (
     <div
-      className="relative group transform transition-transform duration-300 hover:-translate-y-2"
+      className="relative group transform transition-transform duration-300 hover:-translate-y-2 h-full"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
@@ -67,7 +67,7 @@ export default function ProjectCard({
 
       {/* Card Container */}
       <div
-        className={`relative border-2 rounded-xl overflow-hidden bg-[#121212] transition-all duration-300 ${
+        className={`relative border-2 rounded-xl overflow-hidden bg-[#121212] transition-all duration-300 h-full ${
           isHovered ? 'border-[#00ff9d]' : 'border-[#2d2d2d]'
         }`}
       >
