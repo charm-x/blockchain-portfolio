@@ -1,5 +1,6 @@
 'use client';
 
+import { useState } from 'react';
 import dynamic from 'next/dynamic';
 import { motion } from "framer-motion";
 
@@ -16,6 +17,21 @@ const Block = dynamic(() => import("@/components/blocks/Block"), {
   )
 });
 
+// Import Mempool component with client-side only rendering
+const Mempool = dynamic(() => import("@/components/blocks/Mempool"), {
+  ssr: false,
+  loading: () => (
+    <div className="border border-[#2d2d2d] rounded-lg p-6 bg-[#121212] animate-pulse">
+      <div className="h-6 bg-[#1a1a1a] rounded-md mb-4"></div>
+      <div className="h-4 bg-[#1a1a1a] rounded-md mb-2 w-3/4"></div>
+      <div className="grid grid-cols-2 gap-4">
+        <div className="h-32 bg-[#1a1a1a] rounded-md"></div>
+        <div className="h-32 bg-[#1a1a1a] rounded-md"></div>
+      </div>
+    </div>
+  )
+});
+
 // Static block hashes for each experience block
 // Order: oldest (genesis) to newest
 const staticBlockHashes = [
@@ -27,7 +43,10 @@ const staticBlockHashes = [
 ];
 
 export default function BlocksPage() {
-  // Sample data for blocks
+  // State for expanded blocks
+  const [expandedBlockIndex, setExpandedBlockIndex] = useState<number | null>(null);
+
+  // Sample data for blocks (confirmed experiences)
   const blocksData = [
     {
       title: "Senior Smart Contract Engineer",
@@ -144,9 +163,75 @@ export default function BlocksPage() {
     // Return block with previous hash reference
     return {
       ...block,
-      prevBlockHash
+      prevBlockHash,
+      isLastBlock: index === 0 // The first block in the array is the most recent
     };
   });
+
+  // Sample data for mempool items (future aspirations)
+  const mempoolData = [
+    {
+      title: "Blockchain Protocol Architect",
+      timeframe: "Future Goal",
+      description: "Design and implement a novel consensus mechanism that improves scalability while maintaining security. Lead a team of engineers to build a new layer-1 blockchain with focus on interoperability.",
+      techStack: [
+        { name: "Rust", icon: "🦀" },
+        { name: "Consensus", icon: "🔄" },
+        { name: "Cryptography", icon: "🔐" },
+        { name: "Distributed Systems", icon: "🌐" }
+      ],
+      priority: 8,
+      difficulty: 9,
+      status: 'planned',
+      blockHeight: blocks[0].blockHeight + 1, // Next block after the most recent
+      dependencies: ["Senior Smart Contract Engineer"]
+    },
+    {
+      title: "Zero-Knowledge Expert",
+      timeframe: "In Progress",
+      description: "Master zero-knowledge proof systems and their applications in blockchain. Develop privacy-preserving solutions using zk-SNARKs and zk-STARKs for scalable and private transactions.",
+      techStack: [
+        { name: "ZK-Proofs", icon: "👁️" },
+        { name: "Circom", icon: "⚙️" },
+        { name: "Cryptography", icon: "🔐" },
+        { name: "Solidity", icon: "⚙️" }
+      ],
+      priority: 9,
+      difficulty: 8,
+      status: 'in-progress',
+      blockHeight: blocks[0].blockHeight + 2
+    },
+    {
+      title: "Cross-Chain Infrastructure Developer",
+      timeframe: "Future Goal",
+      description: "Build secure and efficient cross-chain bridges and interoperability solutions. Enable seamless asset transfers and communication between different blockchain networks.",
+      techStack: [
+        { name: "Polkadot", icon: "⚪" },
+        { name: "Cosmos", icon: "⚛️" },
+        { name: "Solidity", icon: "⚙️" },
+        { name: "Substrate", icon: "🧩" }
+      ],
+      priority: 7,
+      difficulty: 7,
+      status: 'pending',
+      blockHeight: blocks[0].blockHeight + 3
+    },
+    {
+      title: "DeFi Protocol Innovator",
+      timeframe: "Future Goal",
+      description: "Create novel DeFi primitives that push the boundaries of on-chain financial systems. Implement capital-efficient lending protocols with advanced risk management mechanisms.",
+      techStack: [
+        { name: "Solidity", icon: "⚙️" },
+        { name: "Financial Models", icon: "📊" },
+        { name: "Game Theory", icon: "🎮" },
+        { name: "Vyper", icon: "🐍" }
+      ],
+      priority: 6,
+      difficulty: 8,
+      status: 'pending',
+      blockHeight: blocks[0].blockHeight + 4
+    }
+  ];
 
   // Animation variants with faster transitions
   const containerVariants = {
@@ -208,10 +293,15 @@ export default function BlocksPage() {
     }
   };
 
+  // Toggle expanded state for a block
+  const toggleExpandBlock = (index: number) => {
+    setExpandedBlockIndex(expandedBlockIndex === index ? null : index);
+  };
+
   return (
     <div className="px-4 md:px-8 py-8">
       <motion.div
-        className="max-w-4xl mx-auto"
+        className="max-w-5xl mx-auto"
         initial="hidden"
         animate="visible"
         variants={containerVariants}
@@ -221,12 +311,20 @@ export default function BlocksPage() {
           variants={headerVariants}
         >
           <h1 className="text-4xl font-bold mb-6">
-            <span className="gradient-text">Experience Blocks</span>
+            <span className="gradient-text">Blockchain Timeline</span>
           </h1>
           <p className="text-lg text-gray-400 max-w-2xl mx-auto">
             My professional journey as a blockchain developer, represented as a chain of blocks.
-            Each block contains details about my experience, skills, and contributions.
+            Each block contains details about my experience, with future aspirations waiting in the mempool.
           </p>
+        </motion.div>
+
+        {/* Mempool Section - Future Aspirations */}
+        <motion.div
+          className="mb-24"
+          variants={headerVariants}
+        >
+          <Mempool items={mempoolData} />
         </motion.div>
 
         {/* Blockchain Timeline */}
@@ -252,6 +350,20 @@ export default function BlocksPage() {
                   variants={connectorVariants}
                 ></motion.div>
 
+                {/* Hash Connection to Previous Block */}
+                {index < blocks.length - 1 && (
+                  <div className="absolute top-12 left-1/2 transform -translate-x-1/2 h-[calc(100%+4rem)] w-1 flex justify-center items-center pointer-events-none">
+                    <motion.div
+                      className="text-xs text-[#00ff9d] font-mono bg-[#0a0a0a] px-2 py-1 rounded-full border border-[#2d2d2d] whitespace-nowrap"
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      transition={{ delay: 1 + index * 0.2 }}
+                    >
+                      Hash Connection
+                    </motion.div>
+                  </div>
+                )}
+
                 {/* Block Content */}
                 <div className={`relative w-full md:w-[calc(50%-40px)] ${index % 2 === 0 ? 'md:mr-auto md:pr-8' : 'md:ml-auto md:pl-8'}`}>
                   <Block
@@ -268,12 +380,56 @@ export default function BlocksPage() {
                     blockHash={block.blockHash}
                     prevBlockHash={block.prevBlockHash}
                     blockHeight={block.blockHeight}
+                    isLastBlock={block.isLastBlock}
+                    expanded={expandedBlockIndex === index}
+                    onToggleExpand={() => toggleExpandBlock(index)}
+                    showHashConnection={index < blocks.length - 1 && expandedBlockIndex === index}
                   />
                 </div>
               </motion.div>
             ))}
           </div>
         </div>
+
+        {/* Blockchain Explorer Legend */}
+        <motion.div
+          className="mt-24 border border-[#2d2d2d] rounded-lg p-6 bg-[#121212]/50 backdrop-blur-sm"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 1.5 }}
+        >
+          <h3 className="text-xl font-bold mb-4 text-[#00ff9d]">Blockchain Explorer Legend</h3>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="flex items-start">
+              <div className="w-4 h-4 rounded-full bg-[#00ff9d] mt-1 mr-3"></div>
+              <div>
+                <h4 className="font-bold text-white">Confirmed Blocks</h4>
+                <p className="text-sm text-gray-400">Verified career experiences that have been added to the blockchain.</p>
+              </div>
+            </div>
+            <div className="flex items-start">
+              <div className="w-4 h-4 rounded-full bg-[#00c3ff] mt-1 mr-3"></div>
+              <div>
+                <h4 className="font-bold text-white">Mempool</h4>
+                <p className="text-sm text-gray-400">Future aspirations and goals waiting to be confirmed on the blockchain.</p>
+              </div>
+            </div>
+            <div className="flex items-start">
+              <div className="w-4 h-4 rounded-full bg-yellow-500 mt-1 mr-3"></div>
+              <div>
+                <h4 className="font-bold text-white">Pending Status</h4>
+                <p className="text-sm text-gray-400">Goals that are queued but not yet actively being pursued.</p>
+              </div>
+            </div>
+            <div className="flex items-start">
+              <div className="w-4 h-4 rounded-full bg-blue-500 mt-1 mr-3"></div>
+              <div>
+                <h4 className="font-bold text-white">In Progress Status</h4>
+                <p className="text-sm text-gray-400">Goals that are currently being worked on but not yet completed.</p>
+              </div>
+            </div>
+          </div>
+        </motion.div>
       </motion.div>
     </div>
   );

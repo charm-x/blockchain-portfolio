@@ -23,6 +23,10 @@ type BlockProps = {
   blockHash?: string; // Current block hash
   prevBlockHash?: string; // Previous block hash
   blockHeight?: number; // Block position in the chain
+  expanded?: boolean; // Whether the block is expanded to show details
+  onToggleExpand?: () => void; // Function to toggle expanded state
+  showHashConnection?: boolean; // Whether to show hash connection visualization
+  isLastBlock?: boolean; // Whether this is the last block in the chain
 };
 
 export default function Block({
@@ -39,10 +43,21 @@ export default function Block({
   blockHash = "0x0000000000000000",
   prevBlockHash = "0x0000000000000000",
   blockHeight = 0,
+  expanded = false,
+  onToggleExpand,
+  showHashConnection = false,
+  isLastBlock = false,
 }: BlockProps) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isMined, setIsMined] = useState(false);
+  const [isMounted, setIsMounted] = useState(false);
   const controls = useAnimation();
+
+  // Handle mounting on client-side only
+  useEffect(() => {
+    setIsMounted(true);
+    return () => setIsMounted(false);
+  }, []);
 
   // Mining animation effect - only run on client side
   useEffect(() => {
@@ -80,14 +95,43 @@ export default function Block({
     return () => clearTimeout(timer);
   }, [controls, blockHeight]);
 
+  // Function to handle modal opening
+  const handleOpenModal = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    e.preventDefault();
+    console.log("Opening modal directly...");
+    setIsModalOpen(true);
+  };
+
   return (
     <motion.div
-      className={`relative border border-[#2d2d2d] rounded-lg p-6 bg-[#121212] hover:bg-[#181818] transition-all ${isGenesis ? 'border-[#00ff9d]' : ''}`}
+      className={`relative border border-[#2d2d2d] rounded-lg p-6 bg-[#121212] hover:bg-[#181818] transition-all ${isGenesis ? 'border-[#00ff9d]' : ''} ${expanded ? 'scale-105 shadow-lg shadow-[#00ff9d]/20' : ''}`}
       initial={{ opacity: 1, y: 0 }}
       animate={controls}
-      whileHover={{ scale: 1.02 }}
+      whileHover={{ scale: expanded ? 1.01 : 1.02 }}
       transition={{ duration: 0.3 }}
+      onClick={() => onToggleExpand && onToggleExpand()}
     >
+      {/* Hash Connection Visualization - only show when enabled */}
+      {showHashConnection && !isGenesis && (
+        <div className="absolute -top-16 left-1/2 transform -translate-x-1/2 w-1 h-16 flex justify-center items-center">
+          <div className="absolute top-0 left-1/2 transform -translate-x-1/2 w-0.5 h-full bg-[#2d2d2d]"></div>
+          <motion.div
+            className="absolute top-0 left-1/2 transform -translate-x-1/2 w-0.5 h-8 bg-[#00ff9d]"
+            animate={{
+              height: ["0%", "100%", "100%"],
+              top: ["0%", "0%", "50%"],
+            }}
+            transition={{
+              duration: 1.5,
+              repeat: Infinity,
+              repeatType: "loop",
+              times: [0, 0.5, 1]
+            }}
+          />
+        </div>
+      )}
+
       {/* Mining Indicator - Client-side only */}
       {!isMined && (
         <motion.div
@@ -101,6 +145,13 @@ export default function Block({
             repeatType: "loop"
           }}
         />
+      )}
+
+      {/* Last Block Indicator */}
+      {isLastBlock && (
+        <div className="absolute -bottom-4 left-1/2 transform -translate-x-1/2 text-xs text-[#00ff9d] font-mono bg-[#0a0a0a] px-2 py-1 rounded-full border border-[#2d2d2d]">
+          Latest Block
+        </div>
       )}
 
       {/* Block Header with Hash and Height */}
@@ -161,8 +212,52 @@ export default function Block({
           ))}
         </div>
 
-        {/* Description */}
-        <p className="text-gray-300 mb-4">{description}</p>
+        {/* Description - Show full description when expanded */}
+        <p className={`text-gray-300 mb-4 ${!expanded && description.length > 150 ? 'line-clamp-3' : ''}`}>
+          {description}
+        </p>
+
+        {/* Direct Modal Button */}
+        <button
+          onClick={handleOpenModal}
+          className="bg-[#1a1a1a] hover:bg-[#2a2a2a] text-white px-3 py-1 rounded-md text-xs flex items-center transition-colors mb-4"
+        >
+          <span className="mr-1">View Full Details</span>
+          <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+          </svg>
+        </button>
+
+        {/* Expanded Content */}
+        {expanded && (
+          <div className="mt-4 border-t border-[#2d2d2d] pt-4 animate-fadeIn">
+            <div className="grid grid-cols-2 gap-4 mb-4">
+              <div className="bg-[#1a1a1a] p-3 rounded-md">
+                <div className="text-xs text-gray-400 mb-1">Gas Used</div>
+                <div className="text-[#00ff9d] font-mono">{gasUsed}k</div>
+              </div>
+              <div className="bg-[#1a1a1a] p-3 rounded-md">
+                <div className="text-xs text-gray-400 mb-1">Confirmations</div>
+                <div className="text-[#00ff9d] font-mono">{confirmations}</div>
+              </div>
+            </div>
+
+            <div className="text-xs text-gray-400 mb-2">Block Hash</div>
+            <div className="bg-[#1a1a1a] p-2 rounded-md mb-3 font-mono text-xs text-[#00ff9d] break-all">
+              {blockHash}
+            </div>
+
+            {!isGenesis && (
+              <>
+                <div className="text-xs text-gray-400 mb-2">Previous Hash</div>
+                <div className="bg-[#1a1a1a] p-2 rounded-md mb-3 font-mono text-xs text-gray-400 break-all">
+                  {prevBlockHash}
+                </div>
+              </>
+            )}
+          </div>
+        )}
       </div>
 
       {/* Block Footer */}
@@ -174,6 +269,7 @@ export default function Block({
               target="_blank"
               rel="noopener noreferrer"
               className="text-gray-400 hover:text-[#00ff9d] transition-colors"
+              onClick={(e) => e.stopPropagation()} // Prevent triggering block expand
             >
               <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
@@ -186,6 +282,7 @@ export default function Block({
               target="_blank"
               rel="noopener noreferrer"
               className="text-gray-400 hover:text-[#00ff9d] transition-colors"
+              onClick={(e) => e.stopPropagation()} // Prevent triggering block expand
             >
               <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
@@ -196,15 +293,39 @@ export default function Block({
           )}
         </div>
 
-        <button
-          onClick={() => setIsModalOpen(true)}
-          className="text-xs text-gray-400 hover:text-[#00ff9d] transition-colors flex items-center"
-        >
-          <span className="mr-1">View Details</span>
-          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-            <polyline points="9 18 15 12 9 6"></polyline>
-          </svg>
-        </button>
+        <div className="flex items-center space-x-3">
+          {/* Expand/Collapse Button */}
+          {onToggleExpand && (
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                onToggleExpand();
+              }}
+              className="text-xs text-gray-400 hover:text-[#00ff9d] transition-colors flex items-center"
+              aria-label={expanded ? "Collapse" : "Expand"}
+            >
+              <span className="mr-1">{expanded ? "Collapse" : "Expand"}</span>
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                {expanded ? (
+                  <polyline points="18 15 12 9 6 15"></polyline>
+                ) : (
+                  <polyline points="6 9 12 15 18 9"></polyline>
+                )}
+              </svg>
+            </button>
+          )}
+
+          {/* View Details Button */}
+          <button
+            onClick={handleOpenModal}
+            className="text-xs text-gray-400 hover:text-[#00ff9d] transition-colors flex items-center"
+          >
+            <span className="mr-1">View Details</span>
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <polyline points="9 18 15 12 9 6"></polyline>
+            </svg>
+          </button>
+        </div>
       </div>
 
       {/* Block Stats */}
@@ -219,12 +340,13 @@ export default function Block({
         </div>
       </div>
 
-      {/* Modal using the new Modal component */}
-      <Modal
-        open={isModalOpen}
-        onClose={() => setIsModalOpen(false)}
-        maxWidth="lg"
-      >
+      {/* Modal using the new Modal component - only render when mounted */}
+      {isMounted && (
+        <Modal
+          open={isModalOpen}
+          onClose={() => setIsModalOpen(false)}
+          maxWidth="lg"
+        >
         <Modal.Header onClose={() => setIsModalOpen(false)}>
           <h2 className="text-2xl font-bold text-white">{title}</h2>
         </Modal.Header>
@@ -310,7 +432,8 @@ export default function Block({
             </a>
           )}
         </Modal.Actions>
-      </Modal>
+        </Modal>
+      )}
     </motion.div>
   );
 }

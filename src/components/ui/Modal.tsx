@@ -33,17 +33,27 @@ export default function Modal({
   // Handle mounting on client-side only
   useEffect(() => {
     setMounted(true);
-    return () => setMounted(false);
+    console.log("Modal component mounted");
+    return () => {
+      console.log("Modal component unmounted");
+      setMounted(false);
+    };
   }, []);
 
   // Handle focus management
   useEffect(() => {
+    if (!mounted) return;
+
+    console.log("Modal open state changed:", open);
+
     if (open) {
       previousActiveElement.current = document.activeElement;
+      console.log("Modal opening, previous active element:", previousActiveElement.current);
 
       // Focus the modal when it opens
       if (modalRef.current) {
         modalRef.current.focus();
+        console.log("Modal focused");
       }
 
       // Lock scroll
@@ -55,13 +65,14 @@ export default function Modal({
       // Restore focus when modal closes
       if (previousActiveElement.current && 'focus' in previousActiveElement.current) {
         (previousActiveElement.current as HTMLElement).focus();
+        console.log("Focus restored to previous element");
       }
     }
 
     return () => {
       document.body.style.overflow = '';
     };
-  }, [open]);
+  }, [open, mounted]);
 
   // Handle escape key press
   useEffect(() => {
@@ -96,8 +107,8 @@ export default function Modal({
     xl: 'max-w-6xl',
   };
 
-  // Don't render anything on the server
-  if (!mounted) return null;
+  // Don't render anything on the server or if document is not available
+  if (!mounted || typeof document === 'undefined') return null;
 
   // Use portal to render at the root level
   return createPortal(
