@@ -58,7 +58,7 @@ export default function SidebarLayout({ children }: { children: React.ReactNode 
   return (
     <div className="flex min-h-screen">
       {/* Sidebar - Desktop */}
-      <div className="hidden md:block w-64 bg-black/80 backdrop-blur-md border-r border-[#2d2d2d] fixed h-full overflow-y-auto z-50">
+      <div className="hidden md:block w-64 bg-black/80 backdrop-blur-md border-r border-[#2d2d2d] fixed h-full overflow-y-auto z-50 scrollbar-hide">
         <div className="p-4 pb-20">
           {/* Logo */}
           <Link href="/" className="text-xl font-bold text-white flex items-center mb-6">
