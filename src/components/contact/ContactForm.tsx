@@ -1,7 +1,6 @@
 'use client';
 
 import { useState } from 'react';
-import Button from '../ui/Button';
 
 export default function ContactForm() {
   const [formData, setFormData] = useState({
@@ -38,6 +37,7 @@ export default function ContactForm() {
       setSubmitStatus('success');
       setFormData({ name: '', email: '', message: '' });
     } catch (error) {
+      console.error('Form submission error:', error);
       setSubmitStatus('error');
     } finally {
       setIsSubmitting(false);

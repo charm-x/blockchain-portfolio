@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import Modal from '@/components/ui/Modal';
+import Image from 'next/image';
 
 type TechStack = {
   name: string;
@@ -91,20 +92,21 @@ export default function ProjectCard({
 
         {/* Project Image */}
         <div className="relative h-48 w-full overflow-hidden bg-[#1a1a1a] flex items-center justify-center">
-          {/* Project Icon */}
-          <div className="absolute inset-0 flex items-center justify-center">
-            <div
-              className={`text-5xl transform transition-transform duration-300 ${
+          {/* Project Image */}
+          <div className="absolute inset-0">
+            <Image
+              src={title.includes("DeFi") ? "/projects/defi-swap.jpg" :
+                   title.includes("NFT") ? "/projects/nft-marketplace.jpg" :
+                   title.includes("Multi-Sig") ? "/projects/multi-sig.jpg" :
+                   title.includes("DAO") ? "/projects/dao-governance.jpg" :
+                   title.includes("Staking") ? "/projects/staking-platform.jpg" :
+                   title.includes("Bridge") ? "/projects/cross-chain-bridge.jpg" : "/projects/defi-swap.jpg"}
+              alt={title}
+              fill
+              className={`object-cover transition-transform duration-300 ${
                 isHovered ? 'scale-110' : 'scale-100'
               }`}
-            >
-              {title.includes("DeFi") ? "🔄" :
-               title.includes("NFT") ? "🖼️" :
-               title.includes("Multi-Sig") ? "🔐" :
-               title.includes("DAO") ? "🏛️" :
-               title.includes("Staking") ? "💰" :
-               title.includes("Bridge") ? "🌉" : "⛓️"}
-            </div>
+            />
           </div>
 
           {/* Hover Animation Overlay - More subtle */}
@@ -128,7 +130,7 @@ export default function ProjectCard({
           <div className="flex flex-wrap gap-2 mb-3">
             {techStack.map((tech, index) => (
               <div key={index} className="bg-[#1a1a1a] px-2 py-1 rounded-md text-xs flex items-center">
-                <img src={tech.icon} alt={tech.name} className="w-4 h-4 mr-1" />
+                <Image src={tech.icon} alt={tech.name} width={16} height={16} className="mr-1" />
                 {tech.name}
               </div>
             ))}
@@ -227,13 +229,18 @@ export default function ProjectCard({
             {/* Left column - Project Image and Metadata */}
             <div className="md:col-span-1">
               <div className="relative h-48 md:h-48 w-full rounded-xl overflow-hidden bg-[#1a1a1a] flex items-center justify-center border border-[#2d2d2d]">
-                <div className="text-6xl">
-                  {title.includes("DeFi") ? "🔄" :
-                   title.includes("NFT") ? "🖼️" :
-                   title.includes("Multi-Sig") ? "🔐" :
-                   title.includes("DAO") ? "🏛️" :
-                   title.includes("Staking") ? "💰" :
-                   title.includes("Bridge") ? "🌉" : "⛓️"}
+                <div className="absolute inset-0">
+                  <Image
+                    src={title.includes("DeFi") ? "/projects/defi-swap.jpg" :
+                         title.includes("NFT") ? "/projects/nft-marketplace.jpg" :
+                         title.includes("Multi-Sig") ? "/projects/multi-sig.jpg" :
+                         title.includes("DAO") ? "/projects/dao-governance.jpg" :
+                         title.includes("Staking") ? "/projects/staking-platform.jpg" :
+                         title.includes("Bridge") ? "/projects/cross-chain-bridge.jpg" : "/projects/defi-swap.jpg"}
+                    alt={title}
+                    fill
+                    className="object-cover"
+                  />
                 </div>
 
                 {/* NFT Overlay */}
@@ -284,7 +291,7 @@ export default function ProjectCard({
                 <div className="flex flex-wrap gap-2">
                   {techStack.map((tech, index) => (
                     <div key={index} className="bg-[#1a1a1a] px-2 py-1 rounded-md text-xs flex items-center">
-                      <img src={tech.icon} alt={tech.name} className="w-4 h-4 mr-1" />
+                      <Image src={tech.icon} alt={tech.name} width={16} height={16} className="mr-1" />
                       {tech.name}
                     </div>
                   ))}

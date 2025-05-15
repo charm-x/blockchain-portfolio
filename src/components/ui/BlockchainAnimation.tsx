@@ -38,8 +38,6 @@ type MiningBlock = {
 
 export default function BlockchainAnimation() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const [cryptoElements, setCryptoElements] = useState<AnimatedElement[]>([]);
-  const [miningBlocks, setMiningBlocks] = useState<MiningBlock[]>([]);
 
   // Load crypto icons
   const [icons, setIcons] = useState<Record<CryptoType, HTMLImageElement | null>>({

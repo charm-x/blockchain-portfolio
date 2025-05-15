@@ -6,7 +6,7 @@ export default function ProjectsPage() {
     {
       title: "DeFi Swap Protocol",
       description: "A decentralized token swap protocol with automated market making and liquidity pools. Features include low slippage trades, flash loans, and yield farming opportunities.",
-      imageSrc: "/projects/defi-swap.jpg", // Placeholder - you'll need to add actual images
+      imageSrc: "/projects/defi-swap.jpg",
       techStack: [
         { name: "Solidity", icon: "/icons/tech/solidity.svg" },
         { name: "React", icon: "/icons/tech/react.svg" },
@@ -24,7 +24,7 @@ export default function ProjectsPage() {
     {
       title: "NFT Marketplace",
       description: "A decentralized marketplace for creating, buying, selling, and trading NFTs. Supports ERC-721 and ERC-1155 tokens with royalty distribution and auction mechanisms.",
-      imageSrc: "/projects/nft-marketplace.jpg", // Placeholder
+      imageSrc: "/projects/nft-marketplace.jpg",
       techStack: [
         { name: "Solidity", icon: "/icons/tech/solidity.svg" },
         { name: "Next.js", icon: "/icons/tech/nextjs.svg" },
@@ -42,7 +42,7 @@ export default function ProjectsPage() {
     {
       title: "Multi-Sig Wallet",
       description: "A secure multi-signature wallet requiring multiple approvals for transactions. Features include transaction proposal, approval workflow, and execution tracking.",
-      imageSrc: "/projects/multi-sig.jpg", // Placeholder
+      imageSrc: "/projects/multi-sig.jpg",
       techStack: [
         { name: "Solidity", icon: "/icons/tech/solidity.svg" },
         { name: "TypeScript", icon: "/icons/tech/typescript.svg" },
@@ -60,7 +60,7 @@ export default function ProjectsPage() {
     {
       title: "DAO Governance",
       description: "A decentralized autonomous organization framework with proposal creation, voting mechanisms, and treasury management. Supports both token-weighted and quadratic voting.",
-      imageSrc: "/projects/dao.jpg", // Placeholder
+      imageSrc: "/projects/dao-governance.jpg",
       techStack: [
         { name: "Solidity", icon: "/icons/tech/solidity.svg" },
         { name: "React", icon: "/icons/tech/react.svg" },
@@ -78,7 +78,7 @@ export default function ProjectsPage() {
     {
       title: "Staking Platform",
       description: "A DeFi staking platform allowing users to stake tokens and earn rewards. Features include flexible and locked staking options with variable APY.",
-      imageSrc: "/projects/staking.jpg", // Placeholder
+      imageSrc: "/projects/staking-platform.jpg",
       techStack: [
         { name: "Solidity", icon: "/icons/tech/solidity.svg" },
         { name: "Vue.js", icon: "/icons/tech/vue.svg" },
@@ -96,7 +96,7 @@ export default function ProjectsPage() {
     {
       title: "Cross-Chain Bridge",
       description: "A bridge for transferring assets between different blockchain networks. Supports ERC-20 tokens with secure locking and minting mechanisms.",
-      imageSrc: "/projects/bridge.jpg", // Placeholder
+      imageSrc: "/projects/cross-chain-bridge.jpg",
       techStack: [
         { name: "Solidity", icon: "/icons/tech/solidity.svg" },
         { name: "Rust", icon: "/icons/tech/rust.svg" },

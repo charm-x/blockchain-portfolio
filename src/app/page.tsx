@@ -1,8 +1,8 @@
 import Link from "next/link";
 import Button from "@/components/ui/Button";
 import ProjectImage from "@/components/ui/ProjectImage";
-import SkillLevel from "@/components/ui/SkillLevel";
 import BlockConfirmation from "@/components/ui/BlockConfirmation";
+import Image from "next/image";
 
 export default function Home() {
   return (
@@ -10,6 +10,18 @@ export default function Home() {
       {/* Hero Section */}
       <section className="py-20 md:py-32 flex flex-col items-center text-center">
         <div className="max-w-4xl mx-auto">
+          {/* Profile Image */}
+          <div className="relative w-40 h-40 mx-auto mb-8 rounded-full overflow-hidden border-4 border-[#00ff9d] glow-effect">
+            <Image
+              src="/images/profile.jpg"
+              alt="Blockchain Developer Profile"
+              fill
+              className="object-cover"
+              priority
+            />
+            <div className="absolute inset-0 bg-gradient-to-b from-transparent to-[#121212]/30 pointer-events-none" />
+          </div>
+
           <h1 className="text-4xl md:text-6xl font-bold mb-6">
             <span className="gradient-text">Blockchain Developer</span>
           </h1>
@@ -18,7 +30,7 @@ export default function Home() {
           </h2>
           <p className="text-lg text-gray-400 mb-10 max-w-2xl mx-auto">
             Building the decentralized future with secure smart contracts,
-            innovative dApps, and blockchain solutions that push the boundaries of what's possible.
+            innovative dApps, and blockchain solutions that push the boundaries of what&apos;s possible.
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -56,15 +68,15 @@ export default function Home() {
                 <h3 className="text-xl font-bold text-white mb-2">DeFi Swap Protocol</h3>
                 <div className="flex flex-wrap gap-2 mb-3">
                   <div className="bg-[#1a1a1a] px-2 py-1 rounded-md text-xs flex items-center">
-                    <img src="/icons/tech/solidity.svg" alt="Solidity" className="w-4 h-4 mr-1" />
+                    <Image src="/icons/tech/solidity.svg" alt="Solidity" width={16} height={16} className="mr-1" />
                     Solidity
                   </div>
                   <div className="bg-[#1a1a1a] px-2 py-1 rounded-md text-xs flex items-center">
-                    <img src="/icons/tech/react.svg" alt="React" className="w-4 h-4 mr-1" />
+                    <Image src="/icons/tech/react.svg" alt="React" width={16} height={16} className="mr-1" />
                     React
                   </div>
                   <div className="bg-[#1a1a1a] px-2 py-1 rounded-md text-xs flex items-center">
-                    <img src="/icons/tech/hardhat.svg" alt="Hardhat" className="w-4 h-4 mr-1" />
+                    <Image src="/icons/tech/hardhat.svg" alt="Hardhat" width={16} height={16} className="mr-1" />
                     Hardhat
                   </div>
                 </div>
@@ -103,15 +115,15 @@ export default function Home() {
                 <h3 className="text-xl font-bold text-white mb-2">NFT Marketplace</h3>
                 <div className="flex flex-wrap gap-2 mb-3">
                   <div className="bg-[#1a1a1a] px-2 py-1 rounded-md text-xs flex items-center">
-                    <img src="/icons/tech/solidity.svg" alt="Solidity" className="w-4 h-4 mr-1" />
+                    <Image src="/icons/tech/solidity.svg" alt="Solidity" width={16} height={16} className="mr-1" />
                     Solidity
                   </div>
                   <div className="bg-[#1a1a1a] px-2 py-1 rounded-md text-xs flex items-center">
-                    <img src="/icons/tech/nextjs.svg" alt="Next.js" className="w-4 h-4 mr-1" />
+                    <Image src="/icons/tech/nextjs.svg" alt="Next.js" width={16} height={16} className="mr-1" />
                     Next.js
                   </div>
                   <div className="bg-[#1a1a1a] px-2 py-1 rounded-md text-xs flex items-center">
-                    <img src="/icons/tech/ipfs.svg" alt="IPFS" className="w-4 h-4 mr-1" />
+                    <Image src="/icons/tech/ipfs.svg" alt="IPFS" width={16} height={16} className="mr-1" />
                     IPFS
                   </div>
                 </div>
@@ -150,15 +162,15 @@ export default function Home() {
                 <h3 className="text-xl font-bold text-white mb-2">Multi-Sig Wallet</h3>
                 <div className="flex flex-wrap gap-2 mb-3">
                   <div className="bg-[#1a1a1a] px-2 py-1 rounded-md text-xs flex items-center">
-                    <img src="/icons/tech/solidity.svg" alt="Solidity" className="w-4 h-4 mr-1" />
+                    <Image src="/icons/tech/solidity.svg" alt="Solidity" width={16} height={16} className="mr-1" />
                     Solidity
                   </div>
                   <div className="bg-[#1a1a1a] px-2 py-1 rounded-md text-xs flex items-center">
-                    <img src="/icons/tech/typescript.svg" alt="TypeScript" className="w-4 h-4 mr-1" />
+                    <Image src="/icons/tech/typescript.svg" alt="TypeScript" width={16} height={16} className="mr-1" />
                     TypeScript
                   </div>
                   <div className="bg-[#1a1a1a] px-2 py-1 rounded-md text-xs flex items-center">
-                    <img src="/icons/tech/ethers.svg" alt="Ethers.js" className="w-4 h-4 mr-1" />
+                    <Image src="/icons/tech/ethers.svg" alt="Ethers.js" width={16} height={16} className="mr-1" />
                     Ethers.js
                   </div>
                 </div>
@@ -199,28 +211,28 @@ export default function Home() {
               <ul className="space-y-4 text-gray-300">
                 <li>
                   <div className="flex items-center mb-2">
-                    <img src="/icons/tech/solidity.svg" alt="Solidity" className="w-5 h-5 mr-2" />
+                    <Image src="/icons/tech/solidity.svg" alt="Solidity" width={20} height={20} className="mr-2" />
                     <span>Solidity</span>
                   </div>
                   <BlockConfirmation level={95} />
                 </li>
                 <li>
                   <div className="flex items-center mb-2">
-                    <img src="/icons/tech/erc.svg" alt="ERC Standards" className="w-5 h-5 mr-2" />
+                    <Image src="/icons/tech/erc.svg" alt="ERC Standards" width={20} height={20} className="mr-2" />
                     <span>ERC Standards</span>
                   </div>
                   <BlockConfirmation level={90} />
                 </li>
                 <li>
                   <div className="flex items-center mb-2">
-                    <img src="/icons/tech/openzeppelin.svg" alt="OpenZeppelin" className="w-5 h-5 mr-2" />
+                    <Image src="/icons/tech/openzeppelin.svg" alt="OpenZeppelin" width={20} height={20} className="mr-2" />
                     <span>OpenZeppelin</span>
                   </div>
                   <BlockConfirmation level={85} />
                 </li>
                 <li>
                   <div className="flex items-center mb-2">
-                    <img src="/icons/tech/gas.svg" alt="Gas Optimization" className="w-5 h-5 mr-2" />
+                    <Image src="/icons/tech/gas.svg" alt="Gas Optimization" width={20} height={20} className="mr-2" />
                     <span>Gas Optimization</span>
                   </div>
                   <BlockConfirmation level={80} />
@@ -234,28 +246,28 @@ export default function Home() {
               <ul className="space-y-4 text-gray-300">
                 <li>
                   <div className="flex items-center mb-2">
-                    <img src="/icons/tech/hardhat.svg" alt="Hardhat" className="w-5 h-5 mr-2" />
+                    <Image src="/icons/tech/hardhat.svg" alt="Hardhat" width={20} height={20} className="mr-2" />
                     <span>Hardhat</span>
                   </div>
                   <BlockConfirmation level={90} />
                 </li>
                 <li>
                   <div className="flex items-center mb-2">
-                    <img src="/icons/tech/truffle.svg" alt="Truffle" className="w-5 h-5 mr-2" />
+                    <Image src="/icons/tech/truffle.svg" alt="Truffle" width={20} height={20} className="mr-2" />
                     <span>Truffle</span>
                   </div>
                   <BlockConfirmation level={75} />
                 </li>
                 <li>
                   <div className="flex items-center mb-2">
-                    <img src="/icons/tech/ethers.svg" alt="Ethers.js" className="w-5 h-5 mr-2" />
+                    <Image src="/icons/tech/ethers.svg" alt="Ethers.js" width={20} height={20} className="mr-2" />
                     <span>Ethers.js</span>
                   </div>
                   <BlockConfirmation level={85} />
                 </li>
                 <li>
                   <div className="flex items-center mb-2">
-                    <img src="/icons/tech/web3.svg" alt="Web3.js" className="w-5 h-5 mr-2" />
+                    <Image src="/icons/tech/web3.svg" alt="Web3.js" width={20} height={20} className="mr-2" />
                     <span>Web3.js</span>
                   </div>
                   <BlockConfirmation level={70} />
@@ -269,28 +281,28 @@ export default function Home() {
               <ul className="space-y-4 text-gray-300">
                 <li>
                   <div className="flex items-center mb-2">
-                    <img src="/icons/tech/react.svg" alt="React" className="w-5 h-5 mr-2" />
+                    <Image src="/icons/tech/react.svg" alt="React" width={20} height={20} className="mr-2" />
                     <span>React</span>
                   </div>
                   <BlockConfirmation level={80} />
                 </li>
                 <li>
                   <div className="flex items-center mb-2">
-                    <img src="/icons/tech/nextjs.svg" alt="Next.js" className="w-5 h-5 mr-2" />
+                    <Image src="/icons/tech/nextjs.svg" alt="Next.js" width={20} height={20} className="mr-2" />
                     <span>Next.js</span>
                   </div>
                   <BlockConfirmation level={75} />
                 </li>
                 <li>
                   <div className="flex items-center mb-2">
-                    <img src="/icons/tech/typescript.svg" alt="TypeScript" className="w-5 h-5 mr-2" />
+                    <Image src="/icons/tech/typescript.svg" alt="TypeScript" width={20} height={20} className="mr-2" />
                     <span>TypeScript</span>
                   </div>
                   <BlockConfirmation level={65} />
                 </li>
                 <li>
                   <div className="flex items-center mb-2">
-                    <img src="/icons/tech/tailwind.svg" alt="Tailwind CSS" className="w-5 h-5 mr-2" />
+                    <Image src="/icons/tech/tailwind.svg" alt="Tailwind CSS" width={20} height={20} className="mr-2" />
                     <span>Tailwind CSS</span>
                   </div>
                   <BlockConfirmation level={80} />
@@ -304,28 +316,28 @@ export default function Home() {
               <ul className="space-y-4 text-gray-300">
                 <li>
                   <div className="flex items-center mb-2">
-                    <img src="/icons/tech/ethereum.svg" alt="Ethereum" className="w-5 h-5 mr-2" />
+                    <Image src="/icons/tech/ethereum.svg" alt="Ethereum" width={20} height={20} className="mr-2" />
                     <span>Ethereum</span>
                   </div>
                   <BlockConfirmation level={95} />
                 </li>
                 <li>
                   <div className="flex items-center mb-2">
-                    <img src="/icons/tech/polygon.svg" alt="Polygon" className="w-5 h-5 mr-2" />
+                    <Image src="/icons/tech/polygon.svg" alt="Polygon" width={20} height={20} className="mr-2" />
                     <span>Polygon</span>
                   </div>
                   <BlockConfirmation level={85} />
                 </li>
                 <li>
                   <div className="flex items-center mb-2">
-                    <img src="/icons/tech/bsc.svg" alt="BSC" className="w-5 h-5 mr-2" />
+                    <Image src="/icons/tech/bsc.svg" alt="BSC" width={20} height={20} className="mr-2" />
                     <span>BSC</span>
                   </div>
                   <BlockConfirmation level={70} />
                 </li>
                 <li>
                   <div className="flex items-center mb-2">
-                    <img src="/icons/tech/layer2.svg" alt="Layer 2 Solutions" className="w-5 h-5 mr-2" />
+                    <Image src="/icons/tech/layer2.svg" alt="Layer 2 Solutions" width={20} height={20} className="mr-2" />
                     <span>Layer 2 Solutions</span>
                   </div>
                   <BlockConfirmation level={80} />
@@ -341,7 +353,7 @@ export default function Home() {
         <div className="max-w-3xl mx-auto">
           <h2 className="text-2xl md:text-3xl font-bold mb-6">Ready to Build Something Amazing?</h2>
           <p className="text-lg text-gray-400 mb-10">
-            Let's collaborate on your next blockchain project and bring your vision to life.
+            Let&apos;s collaborate on your next blockchain project and bring your vision to life.
           </p>
           <Button href="/contact" variant="primary" size="lg" className="glow-effect">
             Get in Touch

@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import Image from 'next/image';
 
 interface ProjectImageProps {
   src: string;
@@ -14,17 +15,22 @@ export default function ProjectImage({ src, alt, fallbackSrc }: ProjectImageProp
   return (
     <>
       {!error ? (
-        <img 
-          src={src} 
-          alt={alt} 
-          className="w-full h-full object-cover" 
-          onError={() => setError(true)} 
+        <Image
+          src={src}
+          alt={alt}
+          className="w-full h-full object-cover"
+          onError={() => setError(true)}
+          width={400}
+          height={300}
+          style={{ objectFit: 'cover' }}
         />
       ) : (
-        <img 
-          src={fallbackSrc} 
-          alt={alt} 
-          className="w-16 h-16" 
+        <Image
+          src={fallbackSrc}
+          alt={alt}
+          className="w-16 h-16"
+          width={64}
+          height={64}
         />
       )}
     </>

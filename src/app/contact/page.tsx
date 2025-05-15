@@ -11,8 +11,18 @@ export default function ContactPage() {
   const blockNumber = Math.floor(Math.random() * 9000000) + 1000000;
 
   return (
-    <div className="px-4 md:px-8 py-8">
-      <div className="max-w-5xl mx-auto">
+    <div className="px-4 md:px-8 py-8 relative">
+      {/* Background Image with Overlay */}
+      <div className="absolute inset-0 z-0 opacity-10">
+        <div className="absolute inset-0 bg-gradient-to-b from-[#121212] to-transparent z-10" />
+        <div className="absolute inset-0 bg-[#121212]/70 z-10" />
+        <div
+          className="w-full h-full bg-cover bg-center"
+          style={{ backgroundImage: 'url("/images/blockchain-bg.jpg")' }}
+        />
+      </div>
+
+      <div className="max-w-5xl mx-auto relative z-10">
         <div className="text-center mb-12">
           <div className="inline-block bg-[#121212] border border-[#2d2d2d] rounded-lg px-4 py-1 mb-4">
             <span className="text-xs font-mono text-[#00ff9d]">BLOCK #{blockNumber}</span>
