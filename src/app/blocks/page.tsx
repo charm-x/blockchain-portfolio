@@ -169,7 +169,17 @@ export default function BlocksPage() {
   });
 
   // Sample data for mempool items (future aspirations)
-  const mempoolData = [
+  const mempoolData: {
+    title: string;
+    timeframe: string;
+    description: string;
+    techStack: { name: string; icon: string; }[];
+    priority: number;
+    difficulty: number;
+    status: 'pending' | 'in-progress' | 'planned';
+    blockHeight: number;
+    dependencies?: string[];
+  }[] = [
     {
       title: "Blockchain Protocol Architect",
       timeframe: "Future Goal",
