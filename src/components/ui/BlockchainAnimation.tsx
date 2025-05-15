@@ -46,6 +46,10 @@ export default function BlockchainAnimation() {
     SOL: null
   });
 
+  // State for animated elements and mining blocks
+  const [, setCryptoElements] = useState<AnimatedElement[]>([]);
+  const [, setMiningBlocks] = useState<MiningBlock[]>([]);
+
   // Generate a random hash
   const generateHash = () => {
     return '0x' + Array.from({ length: 10 }, () =>
