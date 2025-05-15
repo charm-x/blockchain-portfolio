@@ -1,7 +1,7 @@
-import ProjectCard from "@/components/projects/ProjectCard";
+import ProjectsContainer from "@/components/projects/ProjectsContainer";
 
 export default function ProjectsPage() {
-  // Sample data for projects with NFT-style metadata
+  // Sample data for projects with NFT-style metadata and categories
   const projects = [
     {
       title: "DeFi Swap Protocol",
@@ -19,7 +19,8 @@ export default function ProjectsPage() {
       // NFT-style metadata
       tokenId: "0001",
       chain: "ETH",
-      rarity: "Legendary"
+      rarity: "Legendary",
+      category: "DeFi"
     },
     {
       title: "NFT Marketplace",
@@ -37,7 +38,8 @@ export default function ProjectsPage() {
       // NFT-style metadata
       tokenId: "0002",
       chain: "ETH",
-      rarity: "Epic"
+      rarity: "Epic",
+      category: "NFT"
     },
     {
       title: "Multi-Sig Wallet",
@@ -55,7 +57,8 @@ export default function ProjectsPage() {
       // NFT-style metadata
       tokenId: "0003",
       chain: "ETH",
-      rarity: "Rare"
+      rarity: "Rare",
+      category: "Infrastructure"
     },
     {
       title: "DAO Governance",
@@ -73,7 +76,8 @@ export default function ProjectsPage() {
       // NFT-style metadata
       tokenId: "0004",
       chain: "ETH",
-      rarity: "Uncommon"
+      rarity: "Uncommon",
+      category: "DAO"
     },
     {
       title: "Staking Platform",
@@ -91,7 +95,8 @@ export default function ProjectsPage() {
       // NFT-style metadata
       tokenId: "0005",
       chain: "BSC",
-      rarity: "Rare"
+      rarity: "Rare",
+      category: "DeFi"
     },
     {
       title: "Cross-Chain Bridge",
@@ -109,7 +114,8 @@ export default function ProjectsPage() {
       // NFT-style metadata
       tokenId: "0006",
       chain: "DOT",
-      rarity: "Legendary"
+      rarity: "Legendary",
+      category: "Infrastructure"
     }
   ];
 
@@ -126,43 +132,8 @@ export default function ProjectsPage() {
           </p>
         </div>
 
-        {/* Project Filter (can be implemented with state in a client component) */}
-        <div className="flex flex-wrap justify-center gap-4 mb-12">
-          <button className="bg-[#1a1a1a] hover:bg-[#2a2a2a] text-white px-4 py-2 rounded-md transition-colors">
-            All
-          </button>
-          <button className="bg-[#121212] hover:bg-[#2a2a2a] text-gray-400 px-4 py-2 rounded-md transition-colors">
-            DeFi
-          </button>
-          <button className="bg-[#121212] hover:bg-[#2a2a2a] text-gray-400 px-4 py-2 rounded-md transition-colors">
-            NFT
-          </button>
-          <button className="bg-[#121212] hover:bg-[#2a2a2a] text-gray-400 px-4 py-2 rounded-md transition-colors">
-            DAO
-          </button>
-          <button className="bg-[#121212] hover:bg-[#2a2a2a] text-gray-400 px-4 py-2 rounded-md transition-colors">
-            Infrastructure
-          </button>
-        </div>
-
-        {/* Projects Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {projects.map((project, index) => (
-            <ProjectCard
-              key={index}
-              title={project.title}
-              description={project.description}
-              imageSrc={project.imageSrc}
-              techStack={project.techStack}
-              githubLink={project.githubLink}
-              demoLink={project.demoLink}
-              contractAddress={project.contractAddress}
-              tokenId={project.tokenId}
-              chain={project.chain}
-              rarity={project.rarity}
-            />
-          ))}
-        </div>
+        {/* Projects Container with filtering functionality */}
+        <ProjectsContainer projects={projects} />
       </div>
     </div>
   );

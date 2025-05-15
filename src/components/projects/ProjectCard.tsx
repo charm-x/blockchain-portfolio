@@ -21,6 +21,7 @@ type ProjectCardProps = {
   tokenId?: string;
   chain?: string;
   rarity?: string;
+  category?: string; // Added category field
 };
 
 export default function ProjectCard({
@@ -33,6 +34,7 @@ export default function ProjectCard({
   tokenId = Math.floor(Math.random() * 10000).toString().padStart(4, '0'),
   chain = 'ETH',
   rarity = 'Rare',
+  category,
 }: ProjectCardProps) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
@@ -120,7 +122,14 @@ export default function ProjectCard({
         {/* Project Content */}
         <div className="p-5">
           <div className="flex justify-between items-start mb-3">
-            <h3 className="text-xl font-bold text-white">{title}</h3>
+            <div>
+              <h3 className="text-xl font-bold text-white">{title}</h3>
+              {category && (
+                <div className="text-xs text-[#00ff9d] mt-1">
+                  {category}
+                </div>
+              )}
+            </div>
             <div className="bg-[#1a1a1a] px-2 py-1 rounded-full text-xs font-mono text-[#00ff9d]">
               0x{projectHash.substring(0, 6)}
             </div>
@@ -213,7 +222,7 @@ export default function ProjectCard({
             </div>
             <div className="flex items-center text-xs">
               <span className="font-mono text-gray-400 mr-2">
-                {chain} • {rarity}
+                {chain} • {rarity} {category && `• ${category}`}
               </span>
               <div className="font-mono text-gray-400 flex items-center">
                 <span className="w-1.5 h-1.5 rounded-full bg-[#00ff9d] mr-1"></span>
