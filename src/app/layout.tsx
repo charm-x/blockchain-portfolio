@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import ClientBackgroundWrapper from "@/components/ui/ClientBackgroundWrapper";
 import SidebarLayout from "@/components/layout/SidebarLayout";
+import { SpeedInsights } from "@vercel/speed-insights/next"
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -36,6 +37,7 @@ export default function RootLayout({
         <SidebarLayout>
           <main suppressHydrationWarning>
             {children}
+            <SpeedInsights />
           </main>
         </SidebarLayout>
       </body>
