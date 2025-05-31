@@ -4,42 +4,7 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
 import { usePathname } from 'next/navigation';
-
-// Navigation items with blockchain-themed metadata
-const navItems = [
-  {
-    name: 'Home',
-    path: '/',
-    blockHeight: 1,
-    hash: '0x8c3f7c21a5e1b0a5e1b0a5e1b0a5e1b0a5e1b0a5',
-    gasPrice: '12',
-    txCount: '24',
-  },
-  {
-    name: 'Blocks',
-    path: '/blocks',
-    blockHeight: 2,
-    hash: '0x7d9c4e35f2d9c74a86a7f81d8d9a5be71848329',
-    gasPrice: '15',
-    txCount: '18',
-  },
-  {
-    name: 'Projects',
-    path: '/projects',
-    blockHeight: 3,
-    hash: '0x4b3af30f93c1a5c1236aa4f69a7fb0e29c2f2a3',
-    gasPrice: '18',
-    txCount: '32',
-  },
-  {
-    name: 'Contact',
-    path: '/contact',
-    blockHeight: 4,
-    hash: '0x2f1b678a5889d890d25c096bd686f76b48d32c6',
-    gasPrice: '10',
-    txCount: '8',
-  },
-];
+import { navigationItems } from '@/data';
 
 export default function SidebarLayout({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
@@ -53,7 +18,7 @@ export default function SidebarLayout({ children }: { children: React.ReactNode 
   }, [pathname]);
 
   // Get current network stats
-  const currentBlock = navItems.find(item => item.path === activeBlock) || navItems[0];
+  const currentBlock = navigationItems.find(item => item.path === activeBlock) || navigationItems[0];
 
   return (
     <div className="flex min-h-screen">
@@ -78,13 +43,13 @@ export default function SidebarLayout({ children }: { children: React.ReactNode 
             </div>
             <div className="bg-[#1a1a1a] px-3 py-2 rounded-md text-xs text-gray-400 flex items-center">
               <span className="text-[#00ff9d] mr-2">⛓️</span>
-              <span>Latest Block: #{Math.max(...navItems.map(item => item.blockHeight))}</span>
+              <span>Latest Block: #{Math.max(...navigationItems.map(item => item.blockHeight))}</span>
             </div>
           </div>
 
           {/* Navigation Blocks */}
           <div className="space-y-3">
-            {navItems.map((item) => {
+            {navigationItems.map((item) => {
               const isActive = activeBlock === item.path;
               const isHovered = isHovering === item.path;
 
@@ -288,7 +253,7 @@ export default function SidebarLayout({ children }: { children: React.ReactNode 
 
                 {/* Mobile Navigation */}
                 <div className="space-y-3">
-                  {navItems.map((item) => {
+                  {navigationItems.map((item) => {
                     const isActive = activeBlock === item.path;
 
                     return (

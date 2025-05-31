@@ -4,23 +4,7 @@ import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import MempoolItem from './MempoolItem';
 import Select from '../ui/Select';
-
-type TechStack = {
-  name: string;
-  icon: string;
-};
-
-type MempoolItemType = {
-  title: string;
-  timeframe?: string;
-  description: string;
-  techStack: TechStack[];
-  priority?: number;
-  difficulty?: number;
-  status?: 'pending' | 'in-progress' | 'planned';
-  blockHeight?: number;
-  dependencies?: string[];
-};
+import { MempoolItem as MempoolItemType, MempoolSortBy, MempoolFilterStatus } from '@/types';
 
 type MempoolProps = {
   items: MempoolItemType[];
@@ -29,8 +13,8 @@ type MempoolProps = {
 
 export default function Mempool({ items, className = '' }: MempoolProps) {
   const [sortedItems, setSortedItems] = useState<MempoolItemType[]>([]);
-  const [sortBy, setSortBy] = useState<'priority' | 'difficulty' | 'status'>('priority');
-  const [filterStatus, setFilterStatus] = useState<'all' | 'pending' | 'in-progress' | 'planned'>('all');
+  const [sortBy, setSortBy] = useState<MempoolSortBy>('priority');
+  const [filterStatus, setFilterStatus] = useState<MempoolFilterStatus>('all');
 
   // Sort and filter items when props or sort/filter options change
   useEffect(() => {

@@ -4,32 +4,14 @@ import { useState, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import ProjectCard from './ProjectCard';
 import ProjectFilter from './ProjectFilter';
-
-type TechStack = {
-  name: string;
-  icon: string;
-};
-
-type Project = {
-  title: string;
-  description: string;
-  imageSrc?: string;
-  techStack: TechStack[];
-  githubLink?: string;
-  demoLink?: string;
-  contractAddress?: string;
-  tokenId?: string;
-  chain?: string;
-  rarity?: string;
-  category: string; // Added category field
-};
+import { Project, ProjectFilter as ProjectFilterType } from '@/types';
 
 type ProjectsContainerProps = {
   projects: Project[];
 };
 
 export default function ProjectsContainer({ projects }: ProjectsContainerProps) {
-  const [activeFilter, setActiveFilter] = useState<'All' | 'DeFi' | 'NFT' | 'DAO' | 'Infrastructure'>('All');
+  const [activeFilter, setActiveFilter] = useState<ProjectFilterType>('All');
 
   // Filter projects based on the active filter
   const filteredProjects = useMemo(() => {
