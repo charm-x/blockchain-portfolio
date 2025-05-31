@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import dynamic from 'next/dynamic';
 import { motion } from "framer-motion";
+import { blocksData, mempoolData } from '@/data';
 
 // Import Block component with client-side only rendering
 const Block = dynamic(() => import("@/components/blocks/Block"), {
@@ -46,87 +47,7 @@ export default function BlocksPage() {
   // State for expanded blocks
   const [expandedBlockIndex, setExpandedBlockIndex] = useState<number | null>(null);
 
-  // Sample data for blocks (confirmed experiences)
-  const blocksData = [
-    {
-      title: "Senior Smart Contract Engineer",
-      company: "DeFi Protocol Inc.",
-      period: "2022 - Present",
-      description: "Led the development of a decentralized lending protocol with automated interest rate adjustments. Implemented secure smart contracts with comprehensive test coverage and audit preparation.",
-      techStack: [
-        { name: "Solidity", icon: "⚙️" },
-        { name: "Hardhat", icon: "🔨" },
-        { name: "TypeScript", icon: "📝" },
-        { name: "Ethers.js", icon: "🔌" }
-      ],
-      githubLink: "https://github.com",
-      demoLink: "https://defiprotocol.com",
-      gasUsed: 85,
-      confirmations: 12
-    },
-    {
-      title: "Blockchain Developer",
-      company: "NFT Marketplace",
-      period: "2021 - 2022",
-      description: "Designed and implemented smart contracts for an NFT marketplace supporting ERC-721 and ERC-1155 tokens. Built royalty distribution system and auction mechanisms.",
-      techStack: [
-        { name: "Solidity", icon: "⚙️" },
-        { name: "React", icon: "⚛️" },
-        { name: "IPFS", icon: "📦" },
-        { name: "OpenZeppelin", icon: "🛡️" }
-      ],
-      githubLink: "https://github.com",
-      demoLink: "https://nftmarketplace.com",
-      gasUsed: 70,
-      confirmations: 8
-    },
-    {
-      title: "Smart Contract Auditor",
-      company: "Security Firm",
-      period: "2020 - 2021",
-      description: "Conducted security audits for DeFi protocols and NFT projects. Identified and helped fix critical vulnerabilities in smart contracts before deployment.",
-      techStack: [
-        { name: "Solidity", icon: "⚙️" },
-        { name: "Slither", icon: "🐍" },
-        { name: "Mythril", icon: "🔍" },
-        { name: "Echidna", icon: "🦔" }
-      ],
-      githubLink: "https://github.com",
-      gasUsed: 65,
-      confirmations: 6
-    },
-    {
-      title: "Frontend Developer",
-      company: "Web3 Startup",
-      period: "2019 - 2020",
-      description: "Built user interfaces for dApps with wallet integration. Implemented transaction monitoring and blockchain data visualization.",
-      techStack: [
-        { name: "React", icon: "⚛️" },
-        { name: "Web3.js", icon: "🌐" },
-        { name: "JavaScript", icon: "📝" },
-        { name: "MetaMask", icon: "🦊" }
-      ],
-      githubLink: "https://github.com",
-      demoLink: "https://web3startup.com",
-      gasUsed: 50,
-      confirmations: 5
-    },
-    {
-      title: "Computer Science Degree",
-      company: "University of Technology",
-      period: "2015 - 2019",
-      description: "Specialized in cryptography and distributed systems. Completed thesis on consensus mechanisms for blockchain networks.",
-      techStack: [
-        { name: "Algorithms", icon: "🧮" },
-        { name: "Cryptography", icon: "🔐" },
-        { name: "Distributed Systems", icon: "🌐" },
-        { name: "Blockchain", icon: "⛓️" }
-      ],
-      isGenesis: true,
-      gasUsed: 100,
-      confirmations: 24
-    }
-  ];
+
 
   // Prepare blocks with their static hashes
   // The display order is newest first, but we need to connect them in chronological order
@@ -168,80 +89,7 @@ export default function BlocksPage() {
     };
   });
 
-  // Sample data for mempool items (future aspirations)
-  const mempoolData: {
-    title: string;
-    timeframe: string;
-    description: string;
-    techStack: { name: string; icon: string; }[];
-    priority: number;
-    difficulty: number;
-    status: 'pending' | 'in-progress' | 'planned';
-    blockHeight: number;
-    dependencies?: string[];
-  }[] = [
-    {
-      title: "Blockchain Protocol Architect",
-      timeframe: "Future Goal",
-      description: "Design and implement a novel consensus mechanism that improves scalability while maintaining security. Lead a team of engineers to build a new layer-1 blockchain with focus on interoperability.",
-      techStack: [
-        { name: "Rust", icon: "🦀" },
-        { name: "Consensus", icon: "🔄" },
-        { name: "Cryptography", icon: "🔐" },
-        { name: "Distributed Systems", icon: "🌐" }
-      ],
-      priority: 8,
-      difficulty: 9,
-      status: 'planned',
-      blockHeight: blocks[0].blockHeight + 1, // Next block after the most recent
-      dependencies: ["Senior Smart Contract Engineer"]
-    },
-    {
-      title: "Zero-Knowledge Expert",
-      timeframe: "In Progress",
-      description: "Master zero-knowledge proof systems and their applications in blockchain. Develop privacy-preserving solutions using zk-SNARKs and zk-STARKs for scalable and private transactions.",
-      techStack: [
-        { name: "ZK-Proofs", icon: "👁️" },
-        { name: "Circom", icon: "⚙️" },
-        { name: "Cryptography", icon: "🔐" },
-        { name: "Solidity", icon: "⚙️" }
-      ],
-      priority: 9,
-      difficulty: 8,
-      status: 'in-progress',
-      blockHeight: blocks[0].blockHeight + 2
-    },
-    {
-      title: "Cross-Chain Infrastructure Developer",
-      timeframe: "Future Goal",
-      description: "Build secure and efficient cross-chain bridges and interoperability solutions. Enable seamless asset transfers and communication between different blockchain networks.",
-      techStack: [
-        { name: "Polkadot", icon: "⚪" },
-        { name: "Cosmos", icon: "⚛️" },
-        { name: "Solidity", icon: "⚙️" },
-        { name: "Substrate", icon: "🧩" }
-      ],
-      priority: 7,
-      difficulty: 7,
-      status: 'pending',
-      blockHeight: blocks[0].blockHeight + 3
-    },
-    {
-      title: "DeFi Protocol Innovator",
-      timeframe: "Future Goal",
-      description: "Create novel DeFi primitives that push the boundaries of on-chain financial systems. Implement capital-efficient lending protocols with advanced risk management mechanisms.",
-      techStack: [
-        { name: "Solidity", icon: "⚙️" },
-        { name: "Financial Models", icon: "📊" },
-        { name: "Game Theory", icon: "🎮" },
-        { name: "Vyper", icon: "🐍" }
-      ],
-      priority: 6,
-      difficulty: 8,
-      status: 'pending',
-      blockHeight: blocks[0].blockHeight + 4
-    }
-  ];
+
 
   // Animation variants with faster transitions
   const containerVariants = {
